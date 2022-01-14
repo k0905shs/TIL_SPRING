@@ -1,0 +1,21 @@
+-정리
+    기존 v1에서 해결 하지 못한 문제인 level을 표현하기 위해
+    가장 간단한 방법인 파라미터 동기화를 사용해서
+    첫번째 로그에서 사용한 트랜잭션ID와 level을 계속 다음 단계로 넘겨주는 형태
+
+-문제 사항
+    HTTP 요청을 구분하고 깊이를 표현하기 위해서 TraceId 동기화가 필요하다.
+    TraceId 의 동기화를 위해서 관련 메서드의 모든 파라미터를 수정해야 한다.
+    만약 인터페이스가 있다면 인터페이스까지 모두 고쳐야 하는 상황이다.
+    로그를 처음 시작할 때는 begin() 을 호출하고, 처음이 아닐때는 beginSync() 를 호출해야 한다.
+    만약에 컨트롤러를 통해서 서비스를 호출하는 것이 아니라, 다른 곳에서 서비스를 처음으로 호출하는
+    상황이라면 파리미터로 넘길 TraceId 가 없다.
+
+-로그
+    2022-01-14 11:28:01.939  INFO 2368 --- [nio-8090-exec-2] h.a.trace.hellotrace.HelloTraceV2        : [91ec0e3d] OrderController.request()
+    2022-01-14 11:28:01.939  INFO 2368 --- [nio-8090-exec-2] h.a.trace.hellotrace.HelloTraceV2        : [91ec0e3d] |-->OrderService.orderItem()
+    2022-01-14 11:28:01.939  INFO 2368 --- [nio-8090-exec-2] h.a.trace.hellotrace.HelloTraceV2        : [91ec0e3d] | |-->OrderRepository.save()
+    2022-01-14 11:28:02.942  INFO 2368 --- [nio-8090-exec-2] h.a.trace.hellotrace.HelloTraceV2        : [91ec0e3d] | |<--OrderRepository.save() time=1003ms
+    2022-01-14 11:28:02.942  INFO 2368 --- [nio-8090-exec-2] h.a.trace.hellotrace.HelloTraceV2        : [91ec0e3d] |<--OrderService.orderItem() time=1003ms
+    2022-01-14 11:28:02.943  INFO 2368 --- [nio-8090-exec-2] h.a.trace.hellotrace.HelloTraceV2        : [91ec0e3d] OrderController.request() time=1004ms
+
