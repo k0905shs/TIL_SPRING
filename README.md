@@ -43,6 +43,9 @@ hello.advanced.v3
 hello.advanced.v4  
 test.java.hello.advanced.trace.hellotrace.template  
 
+<img src="https://i.ibb.co/BgKjNBP/tem.png" alt="tem" border="0">  
+<img src="https://i.ibb.co/zZj3cZd/tem2.png" alt="tem2" border="0">
+
   ### 설명  
 부모 클래스에 알고리즘의 골격인 템플릿을 정의하고, 일부 변경되는 로직은 자식 클래스에 정의하는  
 것이다.   
@@ -71,6 +74,9 @@ test.java.hello.advanced.trace.hellotrace.template
 ### 예제  
 test.java.hello.advanced.trace.hellotrace.strategy
 
+<img src="https://i.ibb.co/TPhRVzq/stra.png" alt="stra" border="0">
+<img src="https://i.ibb.co/80K0xZJ/stra2.png" alt="stra2" border="0">
+
   ### 설명  
 전략 패턴은 변하지 않는 부분을 Context 라는 곳에 두고, 변하는 부분을 Strategy 라는 인터페이스를  
 만들고 해당 인터페이스를 구현하도록 해서 문제를 해결한다. 상속이 아니라 위임으로 문제를 해결하는 것이다.  
@@ -88,9 +94,14 @@ test.java.hello.advanced.trace.hellotrace.strategy
 hello.advanced.v5  
 test.java.hello.advanced.trace.hellotrace.strategy.callback    
 
+<img src="https://i.ibb.co/kMKX4Yv/callback.png" alt="callback" border="0">
+
   ### 설명
 Strategy Pattern에서 Context 가 템플릿 역할을 하고, Strategy 부분이 콜백으로 넘어온다 생각하면 된다.  
- 참고로 템플릿 콜백 패턴은 GOF 패턴은 아니고, 스프링 내부에서 이런 방식을 자주 사용하기 때문에, 스프링 안에서만 이렇게 부른다.  
+ 참고로 템플릿 콜백 패턴은 GOF 패턴은 아니고, 스프링 내부에서 이런 방식을 자주 사용하기 때문에, 스프링 안에서만 이렇게 부른다.    
+ 
   전략 패턴에서 템플릿과 콜백 부분이 강조된 패턴이라 생각하면 된다.  
- 스프링에서는 JdbcTemplate , RestTemplate , TransactionTemplate , RedisTemplate 처럼 다양한 템플릿 콜백 패턴이 사용된다. 
+ 스프링에서는 JdbcTemplate , RestTemplate , TransactionTemplate , RedisTemplate 처럼 다양한 템플릿 콜백 패턴이 사용된다.   
+ 
  스프링에서 이름에 XxxTemplate 가 있다면 템플릿 콜백 패턴으로 만들어져 있다 생각하면 된다.  
+
