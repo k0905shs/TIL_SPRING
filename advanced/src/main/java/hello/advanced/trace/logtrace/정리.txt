@@ -1,0 +1,5 @@
+-정리
+    traceId 동시성 문제 확인과 해결 방법인 ThreadLocal 을 사용하기 위한 인터페이스와 구현체
+
+    이제 직전 로그의 TraceId 는 파라미터로 전달되는 것이 아니라 FieldLogTrace 의 필드인
+    traceIdHolder 에 저장된다.
