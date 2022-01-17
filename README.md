@@ -3,7 +3,7 @@
   - ThreadLocal
   - TemplateMethod Pattern
   - Strategy Pattern
-  - CallbackMethod Pattern
+  - TemplateCallback Pattern
 
 # 1.ThreadLocal  
 ### 예제  
@@ -66,3 +66,31 @@ test.java.hello.advanced.trace.hellotrace.template
   
 -해결 방안  
  전략 패턴(Strategy Pattern)
+
+# 2.Strategy Pattern 
+### 예제  
+test.java.hello.advanced.trace.hellotrace.strategy
+
+  ### 설명  
+전략 패턴은 변하지 않는 부분을 Context 라는 곳에 두고, 변하는 부분을 Strategy 라는 인터페이스를  
+만들고 해당 인터페이스를 구현하도록 해서 문제를 해결한다. 상속이 아니라 위임으로 문제를 해결하는 것이다.  
+전략 패턴에서 Context 는 변하지 않는 템플릿 역할을 하고, Strategy 는 변하는 알고리즘 역할을 한다.  
+  
+전략 패턴의 핵심은 Context 는 Strategy 인터페이스에만 의존한다는 점이다. 덕분에 Strategy 의  
+구현체를 변경하거나 새로 만들어도 Context 코드에는 영향을 주지 않는다.  
+      
+스프링에서 의존관계 주입에서 사용하는 방식이 바로 전략 패턴이다.
+
+
+
+# 3.TemplateCallback Pattern 
+### 예제  
+hello.advanced.v5  
+test.java.hello.advanced.trace.hellotrace.strategy.callback    
+
+  ### 설명
+Strategy Pattern에서 Context 가 템플릿 역할을 하고, Strategy 부분이 콜백으로 넘어온다 생각하면 된다.  
+ 참고로 템플릿 콜백 패턴은 GOF 패턴은 아니고, 스프링 내부에서 이런 방식을 자주 사용하기 때문에, 스프링 안에서만 이렇게 부른다.  
+  전략 패턴에서 템플릿과 콜백 부분이 강조된 패턴이라 생각하면 된다.  
+ 스프링에서는 JdbcTemplate , RestTemplate , TransactionTemplate , RedisTemplate 처럼 다양한 템플릿 콜백 패턴이 사용된다. 
+ 스프링에서 이름에 XxxTemplate 가 있다면 템플릿 콜백 패턴으로 만들어져 있다 생각하면 된다.  
