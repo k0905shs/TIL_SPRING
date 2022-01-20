@@ -1,4 +1,4 @@
-package hello.proxy.config;
+package hello.proxy.trace.config;
 
 import hello.proxy.app.v1.*;
 import org.springframework.context.annotation.Bean;

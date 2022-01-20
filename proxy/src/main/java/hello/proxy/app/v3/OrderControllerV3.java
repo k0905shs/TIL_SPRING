@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class OrderControllerV3 {
 
-    private OrderServiceV3 orderServiceV2;
+    private OrderServiceV3 orderServiceV3;
 
 
     @GetMapping("/v3/request")
     String request(@RequestParam("itemId") String itemId){
-        orderServiceV2.orderItem(itemId);
+        orderServiceV3.orderItem(itemId);
         return "ok";
     }
 
