@@ -1,10 +1,17 @@
 
+
 # 스프링 고급 
 ## advanced  
   - ThreadLocal
   - TemplateMethod Pattern
   - Strategy Pattern
   - TemplateCallback Pattern
+  -  ㅁ
+  -  ㅁ
+  -  ㅁ
+  -  ㅁ
+  -  ㅁ
+  -  
 
 # 1.ThreadLocal  
 ### 예제  
@@ -106,3 +113,31 @@ Strategy Pattern에서 Context 가 템플릿 역할을 하고, Strategy 부분�
  
  스프링에서 이름에 XxxTemplate 가 있다면 템플릿 콜백 패턴으로 만들어져 있다 생각하면 된다.  
 
+# 0.AOP
+### 설명
+여러 클래스에 걸쳐서 함께 사용되는 부가 기능인 횡단 관심사(cross-cutting concerns)  
+Aspect를 사용한 프로그래밍 방식(Aspect-Oriented Programing)
+-    ※Aspect :부가 기능과 부가 기능을 어디에 적용할지 선택하는 기능을 하나로 합쳐, 모듈로 만든것
+    스프링이 제공하는  어드바이저도 어드바이스(부가기능)과 포인트컷(적용 대상)을 가지고 있으므로, 하나의 애스펙트 이다.  
+    
+AOP는 OOP를 대체하기 위한 것이 아니라 횡단 관심사를 깔끔하게 처리하기 어려운 OOP의 부족한 부분을 보조하는 목적으로 개발되었다.
+
+### AspectJ Framework
+AOP의 대표적인 구현으로 AspectJ Framework가 있다.   
+스프링도 AOP를 지원하지만 대부분 AspectJ의 문법을 차용하고, AspectJ가 제공하는 기능의 일부만 제공한다.
+*스프링은 AspectJ를 직접 사용하는 것이 아니라 AspectJ의 문법을 차용하고, Proxy 방식의 AOP를 적용한다.
+https://www.eclipse.org/aspectj/
+
+### AOP 적용 방식
+#### 컴파일 시점
+.java 소스 코드를 컴파일러를 사용해서 .class 를 만드는 시점에 부가 기능 로직을 추가할 수 있다. 이때는 AspectJ가 제공하는 특별한 컴파일러를 사용해야 한다. 컴파일 된 .class 를 디컴파일 해보면 애스펙트 관련 호출 코드가 들어간다.	
+
+#### 클래스 로딩 시점
+자바를 실행하면 자바 언어는 .class 파일을 JVM 내부의 클래스 로더에 보관한다. 이때 중간에서 .class 파일을 조작한 다음 JVM에 올릴 수 있다. 자바 언어는 .class 를 JVM에 저장하기 전에 조작할 수 있는 기능을 제공한다.
+
+#### 런타임 시점(Proxy)
+런타임 시점은 컴파일도 다 끝나고, 클래스 로더에 클래스도 다 올라가서 이미 자바가 실행되고 난 다음을 말한다. 자바의 메인( main ) 메서드가 이미 실행된 다음이다. 따라서 자바 언어가 제공하는 범위 안에서 부가 기능을 적용해야 한다.
+
+### AOP 적용 위치
+
+### AOP 용어 정리
