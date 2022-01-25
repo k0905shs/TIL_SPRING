@@ -8,10 +8,6 @@
   - TemplateCallback Pattern
   -  ㅁ
   -  ㅁ
-  -  ㅁ
-  -  ㅁ
-  -  ㅁ
-  -  
 
 # 1.ThreadLocal  
 ### 예제  
