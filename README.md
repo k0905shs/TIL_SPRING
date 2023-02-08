@@ -1,15 +1,15 @@
 
-
 # 스프링 고급 
 ## advanced  
   - ThreadLocal
-  - TemplateMethod Pattern
-  - Strategy Pattern
-  - TemplateCallback Pattern
-  -  ㅁ
-  -  ㅁ
+  - Design Pattern
+      - TemplateMethod Pattern
+      - Strategy Pattern
+      - TemplateCallback Pattern
+  -  AOP
+      - AOP_LOG_TRACER   
 
-# 1.ThreadLocal  
+# ThreadLocal  
 ### 예제  
 hello.advanced.v3  
 
@@ -42,7 +42,8 @@ hello.advanced.v3
 위와 같은 문제를 야기 할 수 있으므로, 쓰레드 로컬은 사용이 종료되면 꼬오오옥 remove() 호출해 줘야한다.  
 
   
-# 2.TemplateMethod Pattern 
+# 2.Design Pattern 
+## 2-1 Template Method Pattern
 ### 예제  
 hello.advanced.v4  
 test.java.hello.advanced.trace.hellotrace.template  
@@ -74,7 +75,7 @@ test.java.hello.advanced.trace.hellotrace.template
 -해결 방안  
  전략 패턴(Strategy Pattern)
 
-# 2.Strategy Pattern 
+## 2-2.Strategy Pattern 
 ### 예제  
 test.java.hello.advanced.trace.hellotrace.strategy
 
@@ -93,7 +94,7 @@ test.java.hello.advanced.trace.hellotrace.strategy
 
 
 
-# 3.TemplateCallback Pattern 
+## 2-3.TemplateCallback Pattern 
 ### 예제  
 hello.advanced.v5  
 test.java.hello.advanced.trace.hellotrace.strategy.callback    
@@ -109,7 +110,7 @@ Strategy Pattern에서 Context 가 템플릿 역할을 하고, Strategy 부분�
  
  스프링에서 이름에 XxxTemplate 가 있다면 템플릿 콜백 패턴으로 만들어져 있다 생각하면 된다.  
 
-# 0.AOP
+# 3.AOP
 ### 설명
 여러 클래스에 걸쳐서 함께 사용되는 부가 기능인 횡단 관심사(cross-cutting concerns)  
 Aspect를 사용한 프로그래밍 방식(Aspect-Oriented Programing)
@@ -161,4 +162,34 @@ execution(접근제어자? 반환타입 선언타입?메서드이름(파라미�
  포인트컷으로 결정한 타켓의 조인 포인트에 어드바이스를 적용하는 것 위빙을 통해 핵심 기능 코드에 영향을 주지 않고 부가 기능을 추가 할 수 있음 AOP 적용을 위해 애스펙트를 객체에 연결한 상태 
  
 #### AOP 프록시:
- AOP 기능을 구현하기 위해 만든 프록시 객체, 스프링에서 AOP 프록시는 JDK 동적 프록시 또는 CGLIB 프록시이다  
+ AOP 기능을 구현하기 위해 만든 프록시 객체, 스프링에서 AOP 프록시는 JDK 동적 프록시 또는 CGLIB 프록시이다
+
+## 3-1. AOP 로그 추적기 (AOP_LOG_TRACER)
+#### (hello.toy.logTrace.정리.txt)    
+#### 위치 : hello.toy.logTrace  
+#### Spring AOP를 활용해서 만든 Log 추적기호출기  
+#### 각각의 Layer Level을 표현을 구현하기 위해 ThreadLocal을 사용해서 각 Thread마다 쓰레드 지역 변수를 가질 수 있도록 했다.  
+#### 로그 추적 결과 :
+[ID]  level 이동 그림,  메소드 위치, level, (예외 발생시) 예외 정보  
+#### (정상 호출)
+<img src="https://i.ibb.co/qsF5D5P/image.png" alt="image" border="0" width="700" height="200">  
+
+[e3991604]   --> , location : String hello.toy.LogTrace.LogTraceController.tt(), level : 1  
+[e3991604]  |   | --> , location : String hello.toy.LogTrace.TestService.t1(), level : 2  
+[e3991604]  |   ||   | --> , location : String hello.toy.LogTrace.TestService.t2(), level : 3  
+[e3991604]  |   ||   ||   | --> , location : String hello.toy.LogTrace.TestRepository.t3(), level : 4  
+[e3991604]  |   ||   ||   | <-- , location : String hello.toy.LogTrace.TestRepository.t3(), level : 4  
+[e3991604]  |   ||   | <-- , location : String hello.toy.LogTrace.TestService.t2(), level : 3  
+[e3991604]  |   | <-- , location : String hello.toy.LogTrace.TestService.t1(), level : 2  
+[e3991604]   <-- , location : String hello.toy.LogTrace.LogTraceController.tt(), level : 1  
+
+#### (예외 발생)
+<img src="https://i.ibb.co/0GC2htz/image.png" alt="image" border="0" width="700" height="160">  
+
+[a2339553]   --> , location : String hello.toy.LogTrace.LogTraceController.tt(), level : 1  
+[a2339553]  |   | --> , location : String hello.toy.LogTrace.TestService.t1(), level : 2  
+[a2339553]  |   ||   | --> , location : String hello.toy.LogTrace.TestService.t2(), level : 3  
+[a2339553]  |   ||   | x-- , location : String hello.toy.LogTrace.TestService.t2(), level : 3, Exception : java.lang.NullPointerException  
+[a2339553]  |   | x-- , location : String hello.toy.LogTrace.TestService.t1(), level : 2, Exception : java.lang.NullPointerException  
+[a2339553]   x-- , location : String hello.toy.LogTrace.LogTraceController.tt(), level : 1, Exception : java.lang.NullPointerException  
+2022-01-26 16:48:16.299 ERROR 18116 --- [nio-8080-exec-9] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
