@@ -8,6 +8,8 @@
       - TemplateCallback Pattern
   -  AOP
       - AOP_LOG_TRACER   
+  -  Transaction
+      - 
 
 # ThreadLocal  
 ### 예제  
@@ -193,3 +195,7 @@ execution(접근제어자? 반환타입 선언타입?메서드이름(파라미�
 [a2339553]  |   | x-- , location : String hello.toy.LogTrace.TestService.t1(), level : 2, Exception : java.lang.NullPointerException  
 [a2339553]   x-- , location : String hello.toy.LogTrace.LogTraceController.tt(), level : 1, Exception : java.lang.NullPointerException  
 2022-01-26 16:48:16.299 ERROR 18116 --- [nio-8080-exec-9] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
+
+
+# 3. Transaction
+### 설명
