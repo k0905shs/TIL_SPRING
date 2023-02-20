@@ -227,7 +227,7 @@ Transaction이 완료될 때까지 SELECT 문장이 사용하는 모든 데이�
   
 #### 전파 (Propagation) : 
 Transaction 전파 정도를 나타내는 정보이다. 트랜잭션 경계의 시작 지점에서 트랜잭션 전파 속성을 참조해서 해당 범위의 트랜잭션을 어떤 식으로 진행시킬지 정할 수 있다.  
-<img src="img/propagation.PNG" alt="propagation" border="0">
+<img src="img/propagation_1.PNG" alt="propagation" border="0">
 
 #### 타임아웃 (Timeout) :  
 트랜잭션 실행 한도 시간으로, 이 시간이 지나면 ROLLBACK 된다.
