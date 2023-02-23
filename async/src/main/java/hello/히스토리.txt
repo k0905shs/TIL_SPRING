@@ -1,0 +1,18 @@
+회사 로직 개선 :
+    기존 각각 한껀씩 진행하던 지급 전 크롤링을 통한 셀러 상태 유효성 로직 개선
+
+문제점 : 실시간으로 하루 300건 이상 선정산금 신청 요청이 들어오고, 그로인해 지급 전 유효성 검사 크롤링을 통해 검증 해야할 쇼핑몰 데이터가 1000건 이상 쌓임
+
+기존 업무 프로세스 : 각 신청건에 대한 검증 및 유효성 검사 크롤링을 사람이 직접 한건씩 실행하기 떄문에 업무 처리 속도가 느리고 엄무의 유연성이 많이 떨어짐
+
+개선 프로세스 :
+
+
+Thread Pool 구현
+    - java.util.concurrent.Executor를 Spring에서 구현한것
+    - org.springframework.scheduleing.concurrent 패키지에서 재공
+    - spring에서 비동기 처리를 위해 사용할 수 있다.
+    - Thread Pool을 사용하여 멀티스레드 구현을 쉽게 할 수 있도록 도와준다.
+
+@Async는 Spring AOP에 의해서 프록시 방식으로 작동 하기 때문에
+method 접근지정자 private 사용 불가, self-invocation(자가 호출) 불가, 즉 inner method는 사용 불가
