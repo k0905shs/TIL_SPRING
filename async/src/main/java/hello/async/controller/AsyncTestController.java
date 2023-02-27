@@ -26,6 +26,11 @@ public class AsyncTestController {
         testService.asyncThreadTestV2();
         return "ok";
     }
+    @GetMapping("v3")
+    public String asyncTestV3() {
+        testService.asyncThreadTestV3();
+        return "ok";
+    }
 
 
 

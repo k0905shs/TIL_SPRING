@@ -6,6 +6,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.Executor;
+
 @Slf4j
 @Service("testService")
 public class TestService {
@@ -31,7 +33,7 @@ public class TestService {
         executor1.execute(runnable);
     }
 
-    @Async("v2_executor") //어노테이션에 스레드 풀 네임 사용
+    @Async("v2_executor") //어노테이션에 빈 사용할 빈 네임 사용
     public void asyncThreadTestV2() {
         try {
             log.info("Thread Task V2 Run");
@@ -44,5 +46,20 @@ public class TestService {
             log.error("Thread Task V2 Exception : {}", e.toString());
         }
     }
+
+    @Async //AsyncConfigurer인터페이스의 getAsyncExecutor를 구현하여 사용하는 방식
+    public void asyncThreadTestV3() {
+        try {
+            log.info("Thread Task V3 Run");
+            for (int i = 0; i < 10; i++) {
+                Thread.sleep(500);
+                log.info("{} - index {}", Thread.currentThread().getName(), i);
+            }
+            log.info("Thread Task V3 End");
+        } catch (Exception e) {
+            log.error("Thread Task V3 Exception : {}", e.toString());
+        }
+    }
+
 }
 

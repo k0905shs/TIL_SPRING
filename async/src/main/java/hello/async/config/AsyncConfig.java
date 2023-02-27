@@ -1,7 +1,9 @@
 package hello.async.config;
 
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -10,14 +12,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 @EnableAsync
 @Configuration
-public class AsyncConfig {
+public class AsyncConfig implements AsyncConfigurer {
 
-    @Bean(name = "v1_executor")
+    @Bean(name = "v1_executor") //
     public Executor asyncTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(1); // 기본적으로 실행을 대기하고 있는 Thread의 갯수
-        executor.setMaxPoolSize(2); // 동시 동작하는, 최대 Thread 갯수
-        executor.setQueueCapacity(1); // MaxPoolSize를 초과하는 요청이 Thread 생성 요청시 해당 내용을 Queue에 저장하게 되고, 사용할수 있는 Thread 여유 자리가 발생하면 하나씩 꺼내져서 동작하게 된다.
+        executor.setCorePoolSize(10); // 기본적으로 실행을 대기하고 있는 Thread의 갯수
+        executor.setMaxPoolSize(20); // 동시 동작하는, 최대 Thread 갯수
+        executor.setQueueCapacity(20); // MaxPoolSize를 초과하는 요청이 Thread 생성 요청시 해당 내용을 Queue에 저장하게 되고, 사용할수 있는 Thread 여유 자리가 발생하면 하나씩 꺼내져서 동작하게 된다.
         executor.setThreadNamePrefix("test_executor1");// spring이 생성하는 쓰레드의 접두사
         return executor;
     }
@@ -33,14 +35,30 @@ public class AsyncConfig {
     public Executor asyncTaskExecutor2() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(2);
-        executor.setMaxPoolSize(2);
+        executor.setMaxPoolSize(3);
         executor.setQueueCapacity(1);
         executor.setThreadNamePrefix("test_executor2");
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy()); // Reject Policy 아래 주석 참조
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy()); // Reject Policy 아래 주석 참조
         executor.setAwaitTerminationSeconds(60); // 최대 종료 대기 시간을 설정할 수 있다.
         return executor;
     }
-}
+
+    /**
+     * getAsyncExecutor
+     * AsyncConfigurer 인터페이스의 getAsyncExecutor()를 오버라이딩 해서
+     * default Executor를 설정할 수 있다.
+     */
+	@Override
+    public Executor getAsyncExecutor() {
+//        return this.asyncTaskExecutor2(); //case
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(2);
+        executor.setMaxPoolSize(3);
+        executor.setQueueCapacity(1);
+        executor.setThreadNamePrefix("test_executor3");
+        executor.initialize(); //return this.asyncTaskExecutor2() 방식이 아니리면 initialize() 메소드를 호출해 줘야 함!!!
+        return executor;
+	}
 
     /**
      * Reject Policy
@@ -50,3 +68,5 @@ public class AsyncConfig {
      *  3.ThreadPoolExecutor.DiscardPolicy      -> Reject된 task는 버려진다. Exception도 발생하지 않는다.
      *  4.ThreadPoolExecutor.DiscardOldestPolicy-> 실행자를 종료하지 않는 한 가장 오래된 처리되지 않은 요청을 삭제하고 execute()를 다시 시도한다.
      */
+}
+
