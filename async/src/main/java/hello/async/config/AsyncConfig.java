@@ -1,6 +1,9 @@
 package hello.async.config;
 
+import hello.async.exception.AsyncExceptionHandler;
+import jakarta.annotation.Resource;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
@@ -14,7 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class AsyncConfig implements AsyncConfigurer {
 
-    @Bean(name = "v1_executor") //
+    @Bean(name = "v1_executor")
     public Executor asyncTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(10); // 기본적으로 실행을 대기하고 있는 Thread의 갯수
@@ -32,6 +35,7 @@ public class AsyncConfig implements AsyncConfigurer {
 
 
     @Bean(name = "v2_executor")
+    @Qualifier
     public Executor asyncTaskExecutor2() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(2);
@@ -42,6 +46,15 @@ public class AsyncConfig implements AsyncConfigurer {
         executor.setAwaitTerminationSeconds(60); // 최대 종료 대기 시간을 설정할 수 있다.
         return executor;
     }
+    /**
+     * Reject Policy
+     * Executor는 작업 큐가 꽉 찼을 때 아래 4가지 전략 중에 하나를 선택해서 사용할 수 있다.
+     *  1.ThreadPoolExecutor.AbortPolicy        -> Default, Reject된 task가 RejectedExecutionException을 던진다.
+     *  2.ThreadPoolExecutor.CallerRunsPolicy   -> 호출한 Thread에서 reject된 task를 대신 실행한다.
+     *  3.ThreadPoolExecutor.DiscardPolicy      -> Reject된 task는 버려진다. Exception도 발생하지 않는다.
+     *  4.ThreadPoolExecutor.DiscardOldestPolicy-> 실행자를 종료하지 않는 한 가장 오래된 처리되지 않은 요청을 삭제하고 execute()를 다시 시도한다.
+     */
+
 
     /**
      * getAsyncExecutor
@@ -61,12 +74,11 @@ public class AsyncConfig implements AsyncConfigurer {
 	}
 
     /**
-     * Reject Policy
-     * Executor는 작업 큐가 꽉 찼을 때 아래 4가지 전략 중에 하나를 선택해서 사용할 수 있다.
-     *  1.ThreadPoolExecutor.AbortPolicy        -> Default, Reject된 task가 RejectedExecutionException을 던진다.
-     *  2.ThreadPoolExecutor.CallerRunsPolicy   -> 호출한 Thread에서 reject된 task를 대신 실행한다.
-     *  3.ThreadPoolExecutor.DiscardPolicy      -> Reject된 task는 버려진다. Exception도 발생하지 않는다.
-     *  4.ThreadPoolExecutor.DiscardOldestPolicy-> 실행자를 종료하지 않는 한 가장 오래된 처리되지 않은 요청을 삭제하고 execute()를 다시 시도한다.
+     * 구현한 AsyncExceptionHandle 연결
      */
+    @Override
+     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+        return new AsyncExceptionHandler();
+    }
 }
 
