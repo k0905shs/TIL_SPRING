@@ -17,6 +17,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class AsyncConfig implements AsyncConfigurer {
 
+
+
     @Bean(name = "v1_executor")
     public Executor asyncTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
@@ -63,7 +65,6 @@ public class AsyncConfig implements AsyncConfigurer {
      */
 	@Override
     public Executor getAsyncExecutor() {
-//        return this.asyncTaskExecutor2(); //case
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(2);
         executor.setMaxPoolSize(3);
@@ -73,8 +74,21 @@ public class AsyncConfig implements AsyncConfigurer {
         return executor;
 	}
 
+    @Bean(name = "v4_future")
+    @Qualifier
+    public Executor asyncTaskExecutor4() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(2);
+        executor.setMaxPoolSize(3);
+        executor.setQueueCapacity(1);
+        executor.setThreadNamePrefix("test_future");
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy()); // Reject Policy 아래 주석 참조
+        return executor;
+    }
+
     /**
      * 구현한 AsyncExceptionHandle 연결
+     * 잡히지 않은 비동기 예외가 있는 경우 handleUncaughtException 메서드 호출
      */
     @Override
      public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {

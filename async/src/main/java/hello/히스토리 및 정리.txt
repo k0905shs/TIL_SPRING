@@ -16,3 +16,21 @@ Thread Pool 구현
 
 @Async는 Spring AOP에 의해서 프록시 방식으로 작동 하기 때문에
 method 접근지정자 private 사용 불가, self-invocation(자가 호출) 불가, 즉 inner method는 사용 불가
+
+
+@Async의 사용 가능한 반환 타입
+- 반환 타입이 Future인 경우 예외를 던지지만 void인 경우 호출 스레드로 전파되지 않기 떄문에 따로 예외처리를 해야한다.
+Future
+CompletableFuture
+ListenableFuture
+void
+
+Future
+메서드의 결과값은 전달받아야 한다면 Future을 사용해야 한다.
+Spring에서 제공하는 AsyncResult는 Future의 구현체이며 이를 사용해 Future 타입으로 리턴할 수 있다.
+Future 내부적으로 Thread-Safe 하도록 구현되었기 때문에 synchronized block을 사용하지 않아도 됩니다.
+
+!!!!
+CompletableFuture
+Future이지만 직접 쓰레드를 생성하지 않고 async로 작업을 처리할 수 있고, 여러 CompletableFuture를 병렬로 처리하거나, 병합하여 처리할 수 있게 합니다.
+
