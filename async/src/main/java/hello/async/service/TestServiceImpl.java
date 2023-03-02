@@ -88,11 +88,5 @@ public class TestServiceImpl implements TestService{
         return new AsyncResult<>("Future test Task V4 End");
     }
 
-    @Override
-    @Async("v2_executor")
-    public CompletableFuture<String> completableFuture() {
-        // TODO Blocking Non-Blocking 스터디
-        return null;
-    }
 }
 

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 @RestController
@@ -47,14 +46,5 @@ public class AsyncTestController {
         log.info(futureResult.get());//해당 스레드의 작업이 끝날 때까지 대기하고 끝나면 결과값을 받아온다.
         return "ok";
     }
-
-    @GetMapping("v5-completable-future")
-    public String asyncTestV5() throws Exception {
-        return "공부중";
-    }
-
-
-
-
 
 }
