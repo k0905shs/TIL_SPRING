@@ -24,5 +24,8 @@ public interface TestService {
      */
     Future<String> future();
 
-
+    /**
+     * CompletetableFuture 사용
+     */
+    CompletableFuture<String> completableFuture();
 }

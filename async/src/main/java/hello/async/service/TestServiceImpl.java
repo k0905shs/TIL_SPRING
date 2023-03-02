@@ -8,12 +8,8 @@ import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 
 @Slf4j
 @Service("testService")
@@ -86,6 +82,12 @@ public class TestServiceImpl implements TestService{
         }
         // ExecutorService의 submit 메서드는 리턴값을 future로 감싸서 반환
         return new AsyncResult<>("Future test Task V4 End");
+    }
+
+    @Override
+    public CompletableFuture<String> completableFuture() {
+        //TODO 블로킹 논 블로킹 공부 하고 해당 메소드 구현 테스트
+        return null;
     }
 
 }
