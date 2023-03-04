@@ -1,7 +1,6 @@
 package hello.async.config;
 
 import hello.async.exception.AsyncExceptionHandler;
-import jakarta.annotation.Resource;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -16,8 +15,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 @EnableAsync
 @Configuration
 public class AsyncConfig implements AsyncConfigurer {
-
-
 
     @Bean(name = "v1_executor")
     public Executor asyncTaskExecutor() {
