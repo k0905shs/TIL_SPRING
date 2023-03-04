@@ -1,6 +1,4 @@
-
-# 스프링 고급 
-## advanced  
+## Index  
   - ThreadLocal
   - Design Pattern
       - TemplateMethod Pattern
