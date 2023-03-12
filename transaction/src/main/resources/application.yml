@@ -1,16 +1,16 @@
 server:
-  port: 8877
+  port: 20012
 
 spring:
   data:
   datasource:
     url: jdbc:mysql://211.218.1.46:3306/study?serverTimezone=UTC&characterEncoding=UTF-8
     driverClassName: com.mysql.cj.jdbc.Driver
-    username:
-    password:
+    username: k0905sh
+    password: tjdGUS123~!
   jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL57Dialect
+    database: mysql #mysql
+    database-platform: org.hibernate.dialect.MySQL57Dialect #방언 mysql 설정
     properties:
       hibernate:
         show_sql: true

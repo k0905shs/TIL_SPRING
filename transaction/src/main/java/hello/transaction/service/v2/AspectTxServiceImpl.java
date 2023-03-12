@@ -13,7 +13,6 @@ public class AspectTxServiceImpl implements AspectTxService{
 
     private final MemberRepository memberRepository;
 
-
     @Override
     public void aspectTxV1() {
         Member member1 = new Member("k1");
