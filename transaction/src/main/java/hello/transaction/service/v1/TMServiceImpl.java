@@ -31,7 +31,7 @@ public class TMServiceImpl implements TMService{
     }
 
     @Override//doInTransaction 메소드 안에 로직을 구현해서 사용한다.
-    public Object templateMethod() {
+    public Object templateMethod() throws Exception{
         return transactionTemplate.execute(new TransactionCallback<Object>() {
             public Object doInTransaction(TransactionStatus status) {
                 Member member1 = new Member("k1");
@@ -46,8 +46,8 @@ public class TMServiceImpl implements TMService{
     }
 
     @Override
-    public void platformMethod() {
-
+    public String platformMethod() throws Exception{
+        return "ok";
     }
 
 

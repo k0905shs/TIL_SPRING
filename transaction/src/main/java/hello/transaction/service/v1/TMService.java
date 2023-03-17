@@ -1,7 +1,7 @@
 package hello.transaction.service.v1;
 
 public interface TMService {
-    Object templateMethod();
+    Object templateMethod() throws Exception;
 
-    void platformMethod();
+    String platformMethod() throws Exception;
 }

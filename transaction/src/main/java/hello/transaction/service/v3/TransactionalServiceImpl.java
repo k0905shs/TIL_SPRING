@@ -1,20 +1,21 @@
-package hello.transaction.service.v2;
+package hello.transaction.service.v3;
 
 import hello.transaction.entity.Member;
 import hello.transaction.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
-public class AspectTxServiceImpl implements AspectTxService{
+public class TransactionalServiceImpl implements TransactionalService{
 
     private final MemberRepository memberRepository;
 
     @Override
-    public String aspectTxV1() throws Exception{
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public String transactionalV1() {
         Member member1 = new Member("k1");
         Member member2 = new Member( "k2");
 
@@ -24,4 +25,5 @@ public class AspectTxServiceImpl implements AspectTxService{
         throw new NullPointerException();
 //        return "ok";
     }
+
 }
