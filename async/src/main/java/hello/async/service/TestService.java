@@ -25,7 +25,9 @@ public interface TestService {
     Future<String> future();
 
     /**
-     * CompletetableFuture 사용
+     * v1 태스크가 실행중인지 확인
      */
-    CompletableFuture<String> completableFuture();
+    boolean isRunV1();
+
+    int countV1RemainTask();
 }

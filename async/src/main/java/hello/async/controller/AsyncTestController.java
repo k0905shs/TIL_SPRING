@@ -47,4 +47,13 @@ public class AsyncTestController {
         return "ok";
     }
 
+    @GetMapping("v1-isRun")
+    public boolean isRunV1() {
+        return testService.isRunV1();
+    }
+
+    @GetMapping("v1-ramainTask")
+    public int countV1RemainTask(){
+        return testService.countV1RemainTask();
+    }
 }

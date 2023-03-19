@@ -6,7 +6,8 @@
     각 신청건에 대한 검증 및 유효성 검사 크롤링을 사람이 직접 한건씩 실행하기 떄문에 업무 처리 속도가 느리고 엄무의 유연성이 많이 떨어짐
 
 개선 프로세스 :
-    Spring Async 기능을 사용하여, 사람이 직접 한건씩 버튼을 누르며 결과를 확인 하는 것이 아니라 전체 유효성 검사가 백그라운드에서 돌아가도록 구현
+    Spring ThreadPoolTaskExecutor Async 기능을 사용하여,
+    사람이 직접 한건씩 버튼을 누르며 결과를 확인 하는 것이 아니라 전체 유효성 검사가 백그라운드에서 돌아가도록 구현
 
 --------------------------------------------------------------------------------------------
 Thread Pool 구현
@@ -21,16 +22,3 @@ method 접근지정자 private 사용 불가, self-invocation(자가 호출) 불
 
 @Async의 사용 가능한 반환 타입
 - 반환 타입이 Future인 경우 예외를 던지지만 void인 경우 호출 스레드로 전파되지 않기 떄문에 따로 예외처리를 해야한다.
-Future
-CompletableFuture
-ListenableFuture
-void
-
-Future
-메서드의 결과값은 전달받아야 한다면 Future을 사용해야 한다.
-Spring에서 제공하는 AsyncResult는 Future의 구현체이며 이를 사용해 Future 타입으로 리턴할 수 있다.
-Future 내부적으로 Thread-Safe 하도록 구현되었기 때문에 synchronized block을 사용하지 않아도 됩니다.
-
-CompletableFuture
-Future이지만 직접 쓰레드를 생성하지 않고 async로 작업을 처리할 수 있고, 여러 CompletableFuture를 병렬로 처리하거나, 병합하여 처리할 수 있게 합니다.
-

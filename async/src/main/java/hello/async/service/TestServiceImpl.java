@@ -85,9 +85,13 @@ public class TestServiceImpl implements TestService{
     }
 
     @Override
-    public CompletableFuture<String> completableFuture() {
-        //TODO 블로킹 논 블로킹 공부 하고 해당 메소드 구현 테스트
-        return null;
+    public boolean isRunV1() {
+        return executor1.getActiveCount() > 0;
+    }
+
+    @Override
+    public int countV1RemainTask() {
+        return executor1.getActiveCount() + executor1.getThreadPoolExecutor().getQueue().size();
     }
 
 }
