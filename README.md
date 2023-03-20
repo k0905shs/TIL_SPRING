@@ -1,10 +1,13 @@
 ## Index  
   - Transaction
-      - Spring Transaction  
+      - Transaction 기초
+      - Spring @Transaction  
   - Async  
-      - Spring Async  
+      - Async Non Bloacking - Sync Blocking
+      - Spring @Async  
 
 # 1. Transaction
+## Transaction 기초
 ### 설명
 트랜잭션(transaction)이란 "쪼갤 수 없는 업무 처리의 최소 단위"를 말한다.
 
@@ -51,9 +54,19 @@ flush가 일어나지 않으면, COST절감이 가능하고 생성/수정/삭제
 2. AOP를 사용하여 지정하는 방법 -> 선언적 트랜잭션 방식 (transaction v2, v3.. 코드 참조)  
 이 두가지로 크게 나눌 수 있다.
 
+## Spring @Transactional  
+
+
 
 > reference :  
 https://taetaetae.github.io/2016/10/08/20161008/  
-https://jeong-pro.tistory.com/94
+https://jeong-pro.tistory.com/94  
+
+
+# 2. Async
+
+
+
+
 
 
