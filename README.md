@@ -54,7 +54,7 @@ flush가 일어나지 않으면, COST절감이 가능하고 생성/수정/삭제
 2. AOP를 사용하여 지정하는 방법 -> 선언적 트랜잭션 방식 (transaction v2, v3.. 코드 참조)  
 이 두가지로 크게 나눌 수 있다.
 
-## Spring @Transactional  
+## Spring Transactional  
 
 
 
