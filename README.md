@@ -1,10 +1,10 @@
 ## Index  
   - Transaction
       - Transaction 기초
-      - Spring @Transaction  
+      - Spring Transaction  
   - Async  
       - Async Non Bloacking - Sync Blocking
-      - Spring @Async  
+      - Spring Async  
 
 # 1. Transaction
 ## Transaction 기초
