@@ -1,5 +1,5 @@
 ## Index  
-  - ThreadLocal
+  - [ThreadLocal](./advanced)
   - Design Pattern
       - TemplateMethod Pattern
       - Strategy Pattern
