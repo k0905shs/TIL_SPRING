@@ -6,8 +6,6 @@
       - TemplateCallback Pattern
   -  AOP
       - AOP_LOG_TRACER
-  -  Transaction
-      - Spring Transaction
       
       
 # 2.Design Pattern 
