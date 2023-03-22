@@ -1,11 +1,12 @@
 ## Index  
   - [ThreadLocal](./advanced)
-  - Design Pattern
+  - [Design Pattern](./advanced) 
       - TemplateMethod Pattern
       - Strategy Pattern
       - TemplateCallback Pattern
-  -  AOP
-      - AOP_LOG_TRACER
+  - [Proxy / Decorator Pattern](./proxy) 
+  -  [AOP](./aop)
+      - [AOP_LOG_TRACER](./AOP_LOG_TRACER)
       
       
 # 2.Design Pattern 
