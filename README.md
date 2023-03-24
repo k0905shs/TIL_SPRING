@@ -61,9 +61,9 @@ flush가 일어나지 않으면, COST절감이 가능하고 생성/수정/삭제
 > reference :  
 https://taetaetae.github.io/2016/10/08/20161008/  
 https://jeong-pro.tistory.com/94  
+https://sigridjin.medium.com/spring-transaction-%EA%B4%80%EB%A6%AC%EC%97%90-%EB%8C%80%ED%95%9C-%EB%A9%94%EB%AA%A8-f391fd2885b4
 
-
-# 2. Async
+# 2. Async 
 
 
 
