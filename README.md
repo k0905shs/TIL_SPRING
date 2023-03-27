@@ -1,6 +1,6 @@
 ## Index  
   - Transaction
-      - Transaction 기초
+      - Transaction
       - Spring Transaction  
   - Async  
       - Async Non Bloacking - Sync Blocking
