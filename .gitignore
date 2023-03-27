@@ -5,6 +5,19 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Avoid ignore Gradle wrappper properties
+!gradle-wrapper.properties
+
+# Cache of project
+.gradletasknamecache
+
 ### STS ###
 .apt_generated
 .classpath
@@ -37,3 +50,8 @@ application-db.yml
 
 ### VS Code ###
 .vscode/
+
+### Gradle Patch ###
+# Java heap dump
+*.hprof
+
