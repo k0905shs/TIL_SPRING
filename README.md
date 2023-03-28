@@ -9,7 +9,7 @@
 # 1. Transaction
 ## Transaction 기초
 ### 설명
-트랜잭션(transaction)이란 ** "쪼갤 수 없는 업무 처리의 최소 단위"** 를 말한다.
+트랜잭션(transaction)이란 **"쪼갤 수 없는 업무 처리의 최소 단위"** 를 말한다.
 
 #### 격리 수준 (Isolation Level) :
 Transaction Isolation level을 나타내는 정보 다른 Transaction의 작업과 격리되는 정도를 지정한다.
@@ -55,7 +55,7 @@ flush가 일어나지 않으면, COST절감이 가능하고 생성/수정/삭제
 이 두가지로 크게 나눌 수 있다.
 
 ## Spring Transactional  
-
+내용 정리 중
 
 
 > reference :  
