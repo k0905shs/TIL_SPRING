@@ -59,7 +59,7 @@ Object-relational mapping
  -DB커넥션 시간을 줄일 수 있고, 한 트랜잭션이 테이블에 접근하는 시간을 줄일 수 있다는 장점이 있다.
 
 - #### 변경 감지 (Dirty Checking) :
-<img src="/img/dirty_checking.PNG" alt="propagation" border="0">  
+<img src="/img/dirty_checking.png" alt="propagation" border="0">  
 
 - #### 지연 로딩 (Lazy Loading) :
   
