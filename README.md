@@ -3,7 +3,7 @@
 Java Persistence API  
 자바 ORM 기술 표준    
 어플리케이션과 JDBC사이에서 동작  
-<src="/img/JPA_1.PNG" alt="propagation" border="0">  
+<src="./img/JPA_1.PNG" alt="propagation" border="0">  
 특정 DB에 종속되지 않는다.
 
   
@@ -33,7 +33,7 @@ Object-relational mapping
 - #### 삭제(removed) : 
 삭제된 상태  
 
-<src="/img/entity_lifecycle.PNG" alt="propagation" border="0">  
+<src="./img/entity_lifecycle.PNG" alt="propagation" border="0">  
 
 
 ### Persistence Context (영속성 컨텍스트)
@@ -59,7 +59,7 @@ Object-relational mapping
  -DB커넥션 시간을 줄일 수 있고, 한 트랜잭션이 테이블에 접근하는 시간을 줄일 수 있다는 장점이 있다.
 
 - #### 변경 감지 (Dirty Checking) :
-<src="/img/dirty_checking.PNG" alt="propagation" border="0">  
+<src="./img/dirty_checking.PNG" alt="propagation" border="0">  
 
 - #### 지연 로딩 (Lazy Loading) :
   
