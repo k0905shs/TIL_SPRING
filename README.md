@@ -119,12 +119,11 @@ Object-relational mapping
     + @RequestBody와 마찬가지로 JPA역시 DB에서 조회해 온 뒤 객체를 생성할때 JAVA Reflection를 사용한다.
     + 기본 생성자가 존재하지 않는다면 DB에서 조회해 온 값을 엔티티로 만들 때 객체 생성 자체가 실패하게 되기 때문에 엔티티에서는 기본 생성자 사용이 강제된다.   
       
- **Reference** : 
- 
-    + [JPA 엔티티 생성자](https://velog.io/@jyyoun1022/JPA-JPA%EC%97%90%EC%84%9C-Entity%EC%97%90-protected-%EC%83%9D%EC%84%B1%EC%9E%90%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EC%9D%B4%EC%9C%A0)
+ **Reference** :
+* [JPA 엔티티 생성자](https://velog.io/@jyyoun1022/JPA-JPA%EC%97%90%EC%84%9C-Entity%EC%97%90-protected-%EC%83%9D%EC%84%B1%EC%9E%90%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EC%9D%B4%EC%9C%A0)
     
-    + [@RequestBody](https://velog.io/@conatuseus/RequestBody%EC%97%90-%EC%99%9C-%EA%B8%B0%EB%B3%B8-%EC%83%9D%EC%84%B1%EC%9E%90%EB%8A%94-%ED%95%84%EC%9A%94%ED%95%98%EA%B3%A0-Setter%EB%8A%94-%ED%95%84%EC%9A%94-%EC%97%86%EC%9D%84%EA%B9%8C-3-idnrafiw)
+* [@RequestBody](https://velog.io/@conatuseus/RequestBody%EC%97%90-%EC%99%9C-%EA%B8%B0%EB%B3%B8-%EC%83%9D%EC%84%B1%EC%9E%90%EB%8A%94-%ED%95%84%EC%9A%94%ED%95%98%EA%B3%A0-Setter%EB%8A%94-%ED%95%84%EC%9A%94-%EC%97%86%EC%9D%84%EA%B9%8C-3-idnrafiw)
     
-    + [JAVA Reflection](https://hudi.blog/java-reflection/)
+* [JAVA Reflection](https://hudi.blog/java-reflection/)
 
 ---
