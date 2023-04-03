@@ -11,6 +11,7 @@ Java Persistence API
 Object-relational mapping  
 객체와 관계형 데이터베이스 중간에서 서로 매핑 시켜주는 기술  
 
+---
 
 ### Entity
 - 데이터 모델링에서 사용되는 객체, 즉 테이블  
@@ -18,6 +19,8 @@ Object-relational mapping
 - 테이블내 각 Row가 Entity 객체이며, 각 Column이 Filed  
 - 테이블 내의 모든 Column은 반드시 Field로 정의 해야함  
 - Entity클래스는 다른 클래스를 상속받거나 인터페이스의 구현체로 사용이 불가  
+
+---
 
 
 ### Entity의 라이프 사이클 
@@ -34,6 +37,8 @@ Object-relational mapping
 삭제된 상태  
 
 <img src="/img/entity_lifecycle.PNG" alt="propagation" border="0">  
+
+---
 
 
 ### Persistence Context (영속성 컨텍스트)
@@ -63,11 +68,16 @@ Object-relational mapping
 
 - #### 지연 로딩 (Lazy Loading) :  
   
+---
+
   
 ### 플러시  
 영속성 컨텍스트의 변경내용을 DB에 동기화  
 영속성 컨텍스트를 비우지는 않는다.  
 **em.flush()**(직접호출), **트랜잭션 커밋**(자동 호출), **JPQL쿼리 실행**(자동 호출) 시점에 플러시가 발생한다.    
+
+---
+
 
 ### 준영속 상태
 영속 상태의 엔티티가 영속성 컨텍스트에서 분리(detached)  
@@ -76,7 +86,8 @@ Object-relational mapping
     + em.detach(entity) - 특정 엔티티만 준영속 상태로 전환
     + em.clear() - 영속성 컨텍스트를 완전히 초기화  
     + em.close() - 영속성 컨텍스트 종료  
- 
+
+---
 
 ### 엔티티 매핑  
  - @Entity가 붙은 클래스는 JPA가 관리, 엔티티라 한다. 
@@ -103,3 +114,7 @@ Object-relational mapping
 
 
 ### JPA의 엔티티에 기본 생성자
+
+
+
+---
