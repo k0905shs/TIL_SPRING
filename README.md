@@ -161,3 +161,18 @@ Object-relational mapping
 * @ManyToOne, @OneToOne은 기본이 즉시 로딩  
 * @OneToMany, @ManyToOne은 기본이 지연 로딩  
     
+---
+
+### 영속성 전이
+* CASCADE 
+    + 특정 엔티티를 영속 상태로 만들 때 연관된 엔티티도 함께 영속 상태로 만들고 싶을때  
+    + 영속성 전이는 연관관계를 매핑하는 것과 아무 관련이 없음  
+    + 엔티티를 영속화할 때 연관된 엔티티도 함께 영속화하는 편리함 을 제공할 뿐  
+
+* CASCADE 종류 
+    + ALL: 모두 적용  
+    + PERSIST: 영속  
+    + REMOVE: 삭제  
+    + MERGE: 병합  
+    + REFRESH: REFRESH  
+    + DETACH: DETACH  
