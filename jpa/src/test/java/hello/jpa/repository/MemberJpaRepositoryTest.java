@@ -30,9 +30,6 @@ class MemberJpaRepositoryTest {
         assertThat(findMember.getUserName()).isEqualTo(member.getUserName());
 
         assertThat(findMember).isEqualTo(member); //findMember == member
-        //jpa 특성상 같은 트랙잭션에서는 영속성 컨텍스트의 동일성을 보장 (같은 인스턴스)
-        //트랜잭션이 다르면 다른 인스턴스
-        //1차 캐시
     }
 
 }
