@@ -1,8 +1,6 @@
 package hello.jpa.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,12 +18,13 @@ public class Member {
 
     private int age;
 
-    public void changeAge(int age) {
-        this.age = age;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
 
-    public void changeUserName(String userName) {
-        this.userName = userName;
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
     }
 
     public Member(String userName, int age) {

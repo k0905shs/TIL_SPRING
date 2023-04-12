@@ -1,10 +1,11 @@
 package hello.jpa.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,6 +16,6 @@ public class Team {
 
     private String teamName;
 
-//    private List<Member> members;
-
+    @OneToMany
+    private List<Member> members = new ArrayList<>();
 }
