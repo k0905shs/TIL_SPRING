@@ -1,4 +1,4 @@
-# JPA
+# JPA 이론 정리 
 ### JPA
 Java Persistence API  
 자바 ORM 기술 표준    
@@ -176,3 +176,5 @@ Object-relational mapping
     + MERGE: 병합  
     + REFRESH: REFRESH  
     + DETACH: DETACH  
+
+---
