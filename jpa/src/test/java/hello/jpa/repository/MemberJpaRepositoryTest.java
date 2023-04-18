@@ -1,6 +1,7 @@
 package hello.jpa.repository;
 
 import hello.jpa.entity.Member;
+import hello.jpa.repository.jpa.MemberJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

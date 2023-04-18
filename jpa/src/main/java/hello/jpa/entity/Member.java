@@ -1,26 +1,30 @@
 package hello.jpa.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(of = {"id", "userName", "age"})
 public class Member {
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
+    @Column(name = "member_id")
     private Long id;
-
     private String userName;
-
     private int age;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
+    @JoinColumn(name = "team_id") // foreign key name
     private Team team;
+
+    public Member(String userName, int age, Team team) {
+        this.userName = userName;
+        this.age = age;
+        if (team != null) {
+            this.changeTeam(team);
+        }
+    }
 
     public void changeTeam(Team team) {
         this.team = team;
