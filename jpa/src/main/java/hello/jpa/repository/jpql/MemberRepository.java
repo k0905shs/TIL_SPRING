@@ -2,8 +2,8 @@ package hello.jpa.repository.jpql;
 
 import hello.jpa.dto.MemberDto;
 import hello.jpa.entity.Member;
-import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -15,29 +15,29 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     List<Member> findByUserNameAndAgeGreaterThan(String userName, int age);
 
-    @Query("select m from Member m where m.username= :username and m.age = :age")
-    List<Member> findUser(@Param("username") String username, @Param("age") int age);
+    @Query("select m from Member m where m.userName= :userName and m.age = :age")
+    List<Member> findUser(@Param("userName") String userName, @Param("age") int age);
 
     /**
      * DTO로 직접 조회
      */
-    @Query("select new study.datajpa.dto.MemberDto(m.id, m.username, t.name) " +
+    @Query("select new hello.jpa.dto.MemberDto(m.id, m.userName, t.teamName) " +
             "from Member m join m.team t")
     List<MemberDto> findMemberDto();
 
     /**
      * 파라미터 바인딩
-     * select m from Member m where m.username = ?0 //위치 기반
-     * select m from Member m where m.username = :name //이름 기반
+     * select m from Member m where m.userName = ?0 //위치 기반
+     * select m from Member m where m.userName = :name //이름 기반
      * !! 가독성을 위해 이름 기반으로 사용하는 것이 좋음
      */
-    @Query("select m from Member m where m.username = :name")
-    Member findMembers(@Param("name") String username);
+    @Query("select m from Member m where m.userName = :name")
+    Member findMembers(@Param("name") String userName);
 
     /**
      * 컬렉션 파라미터 바인딩
      */
-    @Query("select m from Member m where m.username in :names")
+    @Query("select m from Member m where m.userName in :names")
     List<Member> findByNames(@Param("names") List<String> names);
 
     /**
