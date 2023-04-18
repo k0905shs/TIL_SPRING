@@ -21,6 +21,7 @@ spring:
         #update : 변경분만 반영(운영DB에서는 사용하면 안됨)
         #validate : 엔티티와 테이블이 정상 매핑되었는지만 확인
         #none : 사용하지 않음(사실상 없는 값이지만 관례상 none이라고 한다.)
+
     properties:
       hibernate :
         show_sql: true
