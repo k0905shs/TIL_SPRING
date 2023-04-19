@@ -2,6 +2,11 @@ package hello.jpa.repository.jpql;
 
 import hello.jpa.dto.MemberDto;
 import hello.jpa.entity.Member;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -52,5 +57,31 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
      *       결과가 2건 이상 : NonUniqueResultException 예외 발생
      */
 
+
+    /**
+     * org.springframework.data.domain.Sort : 정렬 기능
+     * org.springframework.data.domain.Pageable : 페이징 기능 (내부에 Sort 포함)
+     * Page는 0부터 시작함
+     */
+    Page<Member> findByUserName(String userName, Pageable pageable); //count 쿼리 사용
+
+//    Slice<Member> findByUsername(String userName, Pageable pageable); //count 쿼리 사용안함
+//    List<Member> findByUsername(String userName, Pageable pageable); //count 쿼리 사용안함
+
+    List<Member> findByUserName(String userName, Sort sort);
+
+    Page<Member> findByAge(int age, Pageable pageable);
+
+    /**
+     * 벌크성 수정 쿼리
+     * 벌크성 수정, 삭제 쿼리는 @Modifying 어노테이션을 사용
+     * 벌크성 쿼리를 실행하고 나서 영속성 컨텍스트 초기화: @Modifying(clearAutomatically = true)
+     * 벌크 연산은 영속성 컨텍스트를 무시하고 실행하기 때문에, 영속성 컨텍스트에 있는 엔티티의 상태와
+     * DB에 엔티티 상태가 달라질 수 있다
+     * !!!! 따라서 영속성 컨텍스트에 엔티티가 없는 상태에서 벌크 연산을 먼저 실행한다
+     */
+    @Modifying
+    @Query("update Member m set m.age = m.age + 1 where m.age >= :age")
+    int bulkAgePlus(@Param("age") int age);
 }
 
