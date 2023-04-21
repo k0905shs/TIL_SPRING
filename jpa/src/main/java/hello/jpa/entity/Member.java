@@ -1,5 +1,6 @@
 package hello.jpa.entity;
 
+import hello.jpa.repository.jpql.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,7 +8,7 @@ import lombok.*;
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id", "userName", "age"})
-public class Member {
+public class Member extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;

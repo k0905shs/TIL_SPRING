@@ -107,13 +107,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     //메서드 이름으로 쿼리에서 특히 편리하다.
     @EntityGraph(attributePaths = {"team"})
-    List<Member> findByUsername(String username);
+    List<Member> findByUserName(String userName);
 
-    /**
-     * JPA Hint
-     * JPA 쿼리 힌트(SQL 힌트가 아니라 JPA 구현체에게 제공하는 힌트)
-     */
-    @QueryHints(value = @QueryHint(name = "org.hibernate.readOnly", value = "true"))
-    Member findReadOnlyByUsername(String username);
 }
 
