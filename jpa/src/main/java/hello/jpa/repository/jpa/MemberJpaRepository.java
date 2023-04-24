@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public class MemberJpaRepository {
 
-    @PersistenceContext //스프링 컨테이너가 jpa에 있는 영속성 컨텍스트를 주입한다.
+    @PersistenceContext //스프링 컨테이너가 jpa에 있는 영속성 컨텍스트를 주입한다.'
     private EntityManager em;
 
     public Member save(Member member) {

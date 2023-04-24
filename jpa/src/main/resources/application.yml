@@ -13,7 +13,7 @@ spring:
     database: mysql #mysql
     database-platform: org.hibernate.dialect.MySQL57Dialect #방언 mysql 설정
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
         #create : 기존테이블 삭제 후 다시 생성 (DROP + CREATE)
         #create-drop : create와 같으나 종료시점에 테이블 DROP
         #update : 변경분만 반영(운영DB에서는 사용하면 안됨)
