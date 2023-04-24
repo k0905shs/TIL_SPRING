@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -27,7 +30,18 @@ class MemberQdslRepositoryTest {
 
         Member savedMember = memberQdslRepository.findById(1L);
         System.out.println(savedMember.toString());
-        assertThat(savedMember ).isEqualTo(member1);
+        assertThat(savedMember).isEqualTo(member1);
+    }
+
+    @Test
+    public void findAll() {
+        Member member1 = new Member("test1", 13);
+        Member member2 = new Member("test2", 13);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        List<Member> memberList = memberQdslRepository.findAll();
+        assertThat(memberList.size()).isEqualTo(2);
     }
 
 }
