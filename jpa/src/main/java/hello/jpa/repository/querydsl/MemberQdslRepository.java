@@ -1,6 +1,11 @@
 package hello.jpa.repository.querydsl;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import hello.jpa.dto.MemberDto;
+import hello.jpa.dto.MemberProjectionDto;
+import hello.jpa.dto.MemberQDto;
+import hello.jpa.dto.QMemberQDto;
 import hello.jpa.entity.Member;
 import hello.jpa.entity.QMember;
 import jakarta.persistence.EntityManager;
@@ -47,6 +52,58 @@ public class MemberQdslRepository extends QuerydslRepositorySupport {
     public List<Member> findAll() {
         // 기본 인스턴스로 QMember 사용시 static으로 사용 가능하다.
         return jpaQueryFactory.selectFrom(member)
+                .fetch();
+    }
+
+    /**
+     * Projections
+     * 엔티티와 다른 반환 타입인 경우 Projections를 사용한다.
+     *
+     * Projections 사용 방법
+     * 1. Projections.constructor
+     * 2. Projections.bean
+     * 3. Field 직접 조회
+     * 4. @QueryProjection
+     */
+
+    /**
+     * 1. Projections.constructor
+     */
+    public List<MemberProjectionDto.memberC> findMemberConstructorP() {
+        return jpaQueryFactory.select(Projections.constructor(MemberProjectionDto.memberC.class,
+                        member.userName, member.age)) // 생성자의 경우 type만 맞으면됨 즉 필드명이 달라도 상관이 없다
+                .from(member)
+                .fetch();
+    }
+
+    /**
+     * 2. Projections.bean
+     * .as("age") 처럼 alias를 사용해 이름을 맞출 수 도 있음
+     */
+    public List<MemberProjectionDto.memberB> findMemberBeanP() {
+        return jpaQueryFactory.select(Projections.bean(MemberProjectionDto.memberB.class,
+                        member.userName, member.age.as("age"))) // 이게 dto 필드명이랑 정확히 매칭 되어야 쓸수 있음
+                .from(member)
+                .fetch();
+    }
+    /**
+     * 3. Projections.fields
+     */
+    public List<MemberProjectionDto.memberF> findMemberFieldP() {
+        return jpaQueryFactory.select(Projections.fields(MemberProjectionDto.memberF.class,
+                        member.userName, member.age)) // 이게 dto 필드명이랑 정확히 매칭 되어야 쓸수 있음
+                .from(member)
+                .fetch();
+    }
+
+    /**
+     * 4.@QueryProjection
+     *  dto도 Q 파일로 만들어서 사용할수 가 있다.
+     * 만들고자하는 생성자에 @QueryProjection을 달아주고 !!컴파일!!해주면 Q타입이 생성된다.
+     */
+    public List<MemberQDto> findMemberAnnoP() {
+        return jpaQueryFactory.select(new QMemberQDto(member.userName, member.age))
+                .from(member)
                 .fetch();
     }
 }
