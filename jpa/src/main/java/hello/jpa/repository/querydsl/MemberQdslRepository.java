@@ -1,18 +1,23 @@
 package hello.jpa.repository.querydsl;
 
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import hello.jpa.dto.MemberDto;
 import hello.jpa.dto.MemberProjectionDto;
 import hello.jpa.dto.MemberQDto;
 import hello.jpa.dto.QMemberQDto;
 import hello.jpa.entity.Member;
 import hello.jpa.entity.QMember;
+import hello.jpa.util.OrderCondition;
 import jakarta.persistence.EntityManager;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static hello.jpa.entity.QMember.member;
 /**
@@ -22,13 +27,12 @@ import static hello.jpa.entity.QMember.member;
  */
 @Repository
 public class MemberQdslRepository extends QuerydslRepositorySupport {
-
+    //QuerydslConfiguration 클래스 참조 할 것 !
     private final JPAQueryFactory jpaQueryFactory;
 
-    public MemberQdslRepository(EntityManager entityManager) {
+    public MemberQdslRepository(JPAQueryFactory queryFactory) {
         super(QMember.class);
-        super.setEntityManager(entityManager);
-        this.jpaQueryFactory = new JPAQueryFactory(entityManager);
+        this.jpaQueryFactory = queryFactory;
     }
 
     // findById 예시
@@ -44,9 +48,9 @@ public class MemberQdslRepository extends QuerydslRepositorySupport {
 
     /**
      * fetch() :  리스트로 결과를 반환. (만약에 데이터가 없으면 빈 리스트를 반환.)
-     * fetchOne() : 단건 조회 (결과가 없을때는 null 을 반환하고 둘 이상일 경우에는 NonUniqueResultException)
+     * fetchOne() : 단건 조회 (결과가 없을때는 null 을 반환하고 둘 이상일 경우에는 NonUniqueResultException) / count - byId
      * fetchFirst() : 처음의 한건 반환.
-     * fetchResults() : 해당 내용은 페이징을 위해 사용. 페이징을 위해서 total contents를 가져온다.
+     * fetchResults() : 해당 내용은 페이징을 위해 사용. 하지만 deprecated 되있음 가능하면 count / fetch 별로도 사용하는게 더 좋음
      * fetchCount() : count 쿼리를 날릴 수 있다.
      */
     public List<Member> findAll() {
@@ -106,5 +110,46 @@ public class MemberQdslRepository extends QuerydslRepositorySupport {
                 .from(member)
                 .fetch();
     }
+
+    /**
+     * 정렬
+     * 1. 기본 정렬
+     */
+    public List<Member> findAllMemberOrderByIdDesc() {
+        return jpaQueryFactory.selectFrom(member)
+                .orderBy(member.id.desc(), member.age.asc())
+                .fetch();
+    }
+
+    /**
+     * 2. 동적 정렬 OrderSpecifier
+     */
+    public List<Member> findAllMemberOrderBYDynamic(OrderCondition orderCondition, Order order) {
+        OrderSpecifier[] orderSpecifier = this.generateOrderSpecifier(orderCondition, order);
+        return jpaQueryFactory.selectFrom(member)
+                .orderBy(orderSpecifier)
+                .fetch();
+    }
+
+    /**
+     * 동적정렬을 위한 OrderSpecifier 생성
+     */
+    private OrderSpecifier[] generateOrderSpecifier(OrderCondition orderCondition, Order order) {
+        List<OrderSpecifier> orderSpecifierList = new ArrayList<>();
+        if(Objects.isNull(order))
+            order = Order.DESC;
+
+        if(Objects.isNull(orderCondition)){
+            orderSpecifierList.add(new OrderSpecifier(order, member.id));
+        }else if(orderCondition.equals(OrderCondition.AGE)){
+            orderSpecifierList.add(new OrderSpecifier(order, member.age));
+        }else{
+            orderSpecifierList.add(new OrderSpecifier(order, member.userName));
+        }
+        //추가적으로 정렬 조건을 add 할 수 있다.
+//        orderSpecifierList.add(new OrderSpecifier(Order.ASC, member.someting));
+        return orderSpecifierList.toArray(new OrderSpecifier[orderSpecifierList.size()]);
+    }
+
 }
 

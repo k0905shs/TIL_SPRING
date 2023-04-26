@@ -1,10 +1,12 @@
 package hello.jpa.repository;
 
+import com.querydsl.core.types.Order;
 import hello.jpa.dto.MemberProjectionDto;
 import hello.jpa.dto.MemberQDto;
 import hello.jpa.entity.Member;
 import hello.jpa.repository.jpql.MemberRepository;
 import hello.jpa.repository.querydsl.MemberQdslRepository;
+import hello.jpa.util.OrderCondition;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -59,4 +61,22 @@ class MemberQdslRepositoryTest {
         assertThat(memberConstructorList.size()).isEqualTo(memberQDtoList.size());
     }
 
+    @Test
+    public void dynamicOrderTest() {
+        Member member1 = new Member("test1", 5);
+        Member member2 = new Member("test2", 4);
+        Member member3 = new Member("test3", 3);
+        Member member4 = new Member("test4", 2);
+        Member member5 = new Member("test5", 1);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+        memberRepository.save(member3);
+        memberRepository.save(member4);
+        memberRepository.save(member5);
+
+        List<Member> memberList = memberQdslRepository.findAllMemberOrderBYDynamic(OrderCondition.AGE, Order.DESC);
+        for (Member member : memberList) {
+            System.out.println(member.toString());
+        }
+    }
 }
