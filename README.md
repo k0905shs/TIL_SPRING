@@ -159,7 +159,7 @@ Object-relational mapping
 * 가급적 지연 로딩만 사용  
 * 즉시 로딩을 적용하면 예상하지 못한 SQL이 발생 (EX. N+1)  
 * @ManyToOne, @OneToOne은 기본이 즉시 로딩  
-* @OneToMany, @ManyToOne은 기본이 지연 로딩  
+* @OneToMany, @ManyToMany 은 기본이 지연 로딩  
     
 ---
 
