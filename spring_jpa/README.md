@@ -36,7 +36,7 @@ Object-relational mapping
 - #### 삭제(removed) : 
 삭제된 상태  
 
-<img src="/img/entity_lifecycle.PNG" alt="propagation" border="0">  
+<img src="./img/entity_lifecycle.PNG" alt="propagation" border="0">  
 
 ---
 
@@ -64,7 +64,7 @@ Object-relational mapping
     + DB커넥션 시간을 줄일 수 있고, 한 트랜잭션이 테이블에 접근하는 시간을 줄일 수 있다는 장점이 있다.  
 
 - #### 변경 감지 (Dirty Checking) :
-<img src="/img/dirty_checking.png" alt="propagation" border="0">  
+<img src="./img/dirty_checking.png" alt="propagation" border="0">  
 
 - #### 지연 로딩 (Lazy Loading) :  
   
@@ -134,7 +134,7 @@ Object-relational mapping
     + em.getReference() : 데이터베이스 조회를 미루는 가짜(프록시) 엔티티 조회  
 
 * 프록시 객체 초기화  
-<img src="/img/proxy_init.PNG" alt="propagation" border="0">  
+<img src="./img/proxy_init.PNG" alt="propagation" border="0">  
   
 * 프록시 객체 특징  
     + 프록시 객체는 처음 사용할 때 한 번만 초기화  
