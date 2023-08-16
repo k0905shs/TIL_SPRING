@@ -3,7 +3,7 @@
 Java Persistence API  
 자바 ORM 기술 표준    
 어플리케이션과 JDBC사이에서 동작  
-<img src="/img/JPA_1.PNG" alt="propagation" border="0">  
+<img src="./img/JPA_1.PNG" alt="propagation" border="0">  
 특정 DB에 종속되지 않는다.  
 
   
