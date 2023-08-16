@@ -1,0 +1,24 @@
+-정리
+    로그를 하나하나 직접 코드를 삽입하여 만드는 형태
+
+-문제 사항
+    아직 level관련 기능 구현x,
+    트랜잭션 ID도 각 로그 요청마다 다르다.
+
+
+-실행 로그
+    2022-01-14 10:43:56.259  INFO 7540 --- [nio-8090-exec-1] h.a.trace.hellotrace.HelloTraceV1        : [bbbc2be4] OrderController.request()
+    2022-01-14 10:43:56.260  INFO 7540 --- [nio-8090-exec-1] h.a.trace.hellotrace.HelloTraceV1        : [b3ecf4d4] OrderService.orderItem()
+    2022-01-14 10:43:56.260  INFO 7540 --- [nio-8090-exec-1] h.a.trace.hellotrace.HelloTraceV1        : [af0b1cc2] OrderRepository.save()
+    2022-01-14 10:43:56.260  INFO 7540 --- [nio-8090-exec-1] h.a.trace.hellotrace.HelloTraceV1        : [af0b1cc2] OrderRepository.save() time=0ms ex=java.lang.IllegalStateException: 예외 발생!
+    2022-01-14 10:43:56.260  INFO 7540 --- [nio-8090-exec-1] h.a.trace.hellotrace.HelloTraceV1        : [b3ecf4d4] OrderService.orderItem() time=0ms ex=java.lang.IllegalStateException: 예외 발생!
+    2022-01-14 10:43:56.261  INFO 7540 --- [nio-8090-exec-1] h.a.trace.hellotrace.HelloTraceV1        : [bbbc2be4] OrderController.request() time=2ms ex=java.lang.IllegalStateException: 예외 발생!
+
+-남은 요구 사항
+    메서드 호출의 깊이 표현
+    HTTP 요청을 구분
+    HTTP 요청 단위로 특정 ID를 남겨서 어떤 HTTP 요청에서 시작된 것인지 명확하게 구분이 가능해야함
+    트랜잭션 ID (DB 트랜잭션X)
+
+
+
